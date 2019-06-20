@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package>
+  <name>slam_exploration</name>
+  <version>0.0.0</version>
+  <description>The slam_exploration package</description>
+
+  <maintainer email="marc.reniu.sanchez@gmail.com">MarcReniu</maintainer>
+  <license>TODO</license>
+
+
+  <buildtool_depend>catkin</buildtool_depend>
+
+  <build_depend>geometry_msgs</build_depend>
+  <build_depend>nav_msgs</build_depend>
+  <build_depend>roscpp</build_depend>
+  <build_depend>sensor_msgs</build_depend>
+  <build_depend>cmake_modules</build_depend>
+  <build_depend>dynamic_reconfigure</build_depend>
+  <build_depend>tf</build_depend>
+  <build_depend>mav_msgs</build_depend>
+
+  <run_depend>geometry_msgs</run_depend>
+  <run_depend>nav_msgs</run_depend>
+  <run_depend>roscpp</run_depend>
+  <run_depend>sensor_msgs</run_depend>
+  <run_depend>dynamic_reconfigure</run_depend>
+  <run_depend>tf</run_depend>
+  <run_depend>mav_msgs</run_depend>
+</package>

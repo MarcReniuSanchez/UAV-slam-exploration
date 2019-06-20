@@ -1,0 +1,27 @@
+
+<launch>
+  <!-- FULL launch commands -->
+  <!-- roslaunch slam_exploration slam_exploration.launch -->
+  <!-- roslaunch slam_exploration slam_exploration.launch time_now:=$(date +%Y-%m-%d-%H-%M-%S) -->
+  <!-- roslaunch slam_exploration slam_exploration.launch record_camera:=false -->
+
+  <arg name="mav_name" default="firefly"/>
+  <arg name="time_now" default="temp" />
+  <arg name="record_camera" default="true" />
+
+  <!-- ARDRONE -->
+  <include file="$(find ardrone_autonomy)/launch/ardrone.launch"/>
+
+  <!-- CONTROLLER  -->
+  <include file="$(find rotors_exercise)/launch/mav_homework4_solution.launch"/>
+
+  <!-- WAYPOINT publisher -->
+  <group ns="$(arg mav_name)">
+    <node name="waypoint_generator" pkg="slam_exploration" type="waypoint_generator_node" output="screen"/>
+  </group>
+
+  <!-- Camera ROSBAG generation -->
+  <node pkg="rosbag" type="record" name="rosbag_camera_raw"
+      args="record -O $(find slam_exploration)/rosbags/camera_raw_$(arg time_now).bag ardrone/front/image_raw"
+      if="$(arg record_camera)" />
+</launch>
