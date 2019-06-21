@@ -16,6 +16,6 @@
    <param name="camera_frame_id" type="string" value="camera_link" />
   </node>
 
-  <node pkg="rosbag" type="play" name="player" output="screen" args="-l --clock $(find slam_exploration)/rosbags/camera_raw.bag"/>
+  <node pkg="rosbag" type="play" name="player" output="screen" args="-l --clock $(find slam_exploration)/rosbags/camera_raw_temp.bag"/>
 
 </launch>
