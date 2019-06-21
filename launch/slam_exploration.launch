@@ -10,14 +10,28 @@
   <arg name="record_camera" default="true" />
 
   <!-- ARDRONE -->
-  <include file="$(find ardrone_autonomy)/launch/ardrone.launch"/>
+  <include file="$(find ardrone_autonomy)/launch/ardrone.launch" />
 
   <!-- CONTROLLER  -->
-  <include file="$(find rotors_exercise)/launch/mav_homework4_solution.launch"/>
+  <group ns="$(arg mav_name)">
+  <!-- Launch your nodes here. Extend / adapt for the subtask at hand, if necessary. -->
+    <node name="controller" pkg="rotors_exercise" type="controller_node" clear_params="true" output="screen">
+      <remap from="pose_with_covariance" to="ground_truth/pose_with_covariance"/>
+      <remap from="imu" to="/ardrone/imu" />
+
+      <param name="cog_z" type="double" value="0.08" />
+      <param name="filtering" type="bool" value="true" />
+      <param name="enable_ros_info" type="bool" value="true" />
+
+      <rosparam file="$(find rotors_exercise)/controller.yaml"/>
+    </node>
+  </group>
 
   <!-- WAYPOINT publisher -->
   <group ns="$(arg mav_name)">
-    <node name="waypoint_generator" pkg="slam_exploration" type="waypoint_generator_node" output="screen"/>
+    <node name="waypoint_generator" pkg="slam_exploration" type="waypoint_generator_node" output="screen">
+      <remap from="imu" to="/ardrone/imu" />
+    </node>
   </group>
 
   <!-- Camera ROSBAG generation -->
